@@ -41,7 +41,7 @@ jobs:
         uses: espressif/esp-idf-ci-action@v1
         with:
     # Relative path under $GITHUB_WORKSPACE to place the repository
-          path: ESPNTRIP
+          path: ''
     # Version of ESP-IDF docker image to use
           esp_idf_version: v4.4
     # ESP32 variant to build for
