@@ -43,7 +43,7 @@ jobs:
     # Relative path under $GITHUB_WORKSPACE to place the repository
           path: ESPNTRIP
     # Version of ESP-IDF docker image to use
-          esp_idf_version: V4.4
+          esp_idf_version: v4.4
     # ESP32 variant to build for
           target: esp32
     # Command to run inside the docker container (default: builds the project)
