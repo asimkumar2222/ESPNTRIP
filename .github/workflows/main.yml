@@ -40,6 +40,10 @@ jobs:
         with:
           versionSpec: '5.x'
       
+      - name: Determine Version
+        id:   gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.9
+      
       - name: Display GitVersion outputs
         run: |
           echo "Major: ${{ steps.gitversion.outputs.major }}"
@@ -60,11 +64,9 @@ jobs:
     # ESP32 variant to build for
           target: esp32
     # Command to run inside the docker container (default: builds the project)
-          command: #idf.py build
+          command: idf.py build
           
-      - name: Determine Version
-        id:   gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.9
+
         
       
           
