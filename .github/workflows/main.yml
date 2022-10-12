@@ -40,9 +40,7 @@ jobs:
         with:
           versionSpec: '5.x'
       
-      - name: Determine Version
-        id:   gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.9
+
       
       - name: Display GitVersion outputs
         run: |
@@ -77,8 +75,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.gitversion.outputs.semVer }} ## Was: ${{ steps.versioning.outputs.version }}
-          release_name: Release ${{ steps.gitversion.outputs.semVer }} # Was: ${{ steps.versioning.outputs.version }}
+          tag_name: 1.0.1 #${{ steps.gitversion.outputs.semVer }} ## Was: ${{ steps.versioning.outputs.version }}
+          release_name: 1.0.1 # Release ${{ steps.gitversion.outputs.semVer }} # Was: ${{ steps.versioning.outputs.version }}
           body: |
             Automated Release by GitHub Action CI
           draft: false
