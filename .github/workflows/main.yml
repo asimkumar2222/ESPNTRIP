@@ -48,3 +48,37 @@ jobs:
           target: esp32
     # Command to run inside the docker container (default: builds the project)
           command: idf.py build
+      - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.gitversion.outputs.semVer }} ## Was: ${{ steps.versioning.outputs.version }}
+        release_name: Release ${{ steps.gitversion.outputs.semVer }} # Was: ${{ steps.versioning.outputs.version }}
+        body: |
+          Automated Release by GitHub Action CI
+        draft: false
+        prerelease: true
+        
+    - name: Upload Release Asset Support Files
+      id: upload-release-asset-espntrip-www
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/www.bin
+        asset_name: www.bin
+        asset_content_type: binary/octet-stream
+        
+    - name: Upload Release Asset esp32-xbee
+      id: upload-release-asset-espntrip-xbee
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/esp32-xbee.bin
+        asset_name: esp32-xbee.bin
+        asset_content_type: binary/octet-stream
